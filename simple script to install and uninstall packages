@@ -1,0 +1,25 @@
+sudo yum update -y
+echo "enter package name"
+read package
+echo " install or uninstall"
+read state
+if [ $state == 'install' ]
+	if [ -f /usr/bin/$package || -f /usr/sbin/$package]
+	then 
+		echo "exit"
+	else
+		sudo yum install $package -y
+	fi
+	sudo service $package start
+	sudo chkconfig $package on
+elif [ $state == 'uninstall' ]
+	if [ -f /usr/bin/$package || -f /usr/sbin/$package ]
+	then 
+		service $package stop
+		yum remove $package
+	else
+		echo "package doesnt exit"
+	fi
+else
+	echo "nothing to do"
+fi
