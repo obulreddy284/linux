@@ -1,0 +1,23 @@
+how to create logical group
+
+lsblk - to see the hard disks
+
+pvcreate /dev/sda /dev/sdb /dev/sdc - to create physical volume
+
+pvs - to show physical volume
+
+
+vgcreate {volume group name} /dev/sda /dev/sdb /dev/sdc - to create volume group
+vgextend {volume group name} /dev/sdd
+
+vgs - to show logical volume
+
+lvcreate -l {no of PE} -n {logical volume name} {logical volume group name}
+lvcreate -L {size of logical volume} -n {logical volume name} {logical volume group name}
+
+
+mkfs.ext3 /dev/{logical volume group}/{logical volume name}
+mkfs.xfs /dev/{logical volume group}/{logical volume name}
+
+make directories to mount
+mount /dev/{logical volume group}/{logical volume name} /path of mount directory
