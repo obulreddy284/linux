@@ -1,0 +1,3 @@
+go to that folder using cd and do
+
+grep -inR word
