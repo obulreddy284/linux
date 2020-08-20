@@ -1,0 +1,28 @@
+---> to add a group
+
+sudo groupadd -g <group_id> <group_name>   
+
+--->  to add a user to group
+
+usermod -aG <group_name> <user_name>
+
+---> to remove a user from a group
+
+gpasswd -d user group
+
+---> to remove a group 
+
+  first remove the users in the group and run command sudo groupdel <group name>
+
+---> to get the list of users in a group
+
+getent group <group name>
+
+---> to get the groups user is a part of 
+
+id <user name>
+
+---> groups are present in file /etc/group
+---> users are present in /etc/passwd
+
+
