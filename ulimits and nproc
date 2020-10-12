@@ -1,0 +1,12 @@
+to increase ulimits for all users
+
+for ulimits add the following line to /etc/security/limits.cof
+
+*               soft    nofile          65536
+*               hard    nofile          65536
+
+for nproc values add the following line to /etc/security/limits.d/20-xxxx
+*          soft    nproc     65536
+
+
+if u wnat to change limits for a particular user use linux username instead of * and the value u want to put instead of 65536
