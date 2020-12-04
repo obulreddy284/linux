@@ -12,3 +12,14 @@ done
 method 2
 -------------
 pdsh -R ssh -w ^nodes 'cd /home/hary;ls -ltrh|grep try;exit;'>>/home/hary/obul.txt 
+---------------------------------------------------------
+
+method 3 
+ ----------------------------------------------------------
+ ssh username@$host <<-EOF
+ cd $HOME;
+ echo hostname;
+ command 2;
+ command 3;
+ EOF
+ 

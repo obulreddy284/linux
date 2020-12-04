@@ -1,0 +1,51 @@
+---> using mount command 
+
+mount -v -t nfs <hostname:/<path of mount in server>> </path to file on which we want to mount in local sysytem>
+
+add -r flag if we want to mount in readonly
+
+---> using fstab
+
+do sudo vi /etc/fstab and add the following entry
+
+<hostname:/<path of mount in server>> </path to file on which we want to mount in local sysytem> nfs default 0 0
+ if we want real only then instead of default add ro
+ example : <hostname:/<path of mount in server>> </path to file on which we want to mount in local sysytem> nfs ro 0 0
+ 
+ then do sudo mount -a to mount all the entries in fstab
+ 
+ ---> using autofs
+ 
+ first create a mapping file in /etc
+ example : touch /etc/auto.mapping_exapmle
+ then create a directory for mounting the mount points
+ example : mkdir /home/hari/test
+ 
+ note : this directory will be owned by auto fs so we should not create anythis in this directory
+ 
+ 
+ do vi /etc/autofs.master
+ 
+ add the following entry 
+ </path on local machine where u want to mount all the mounts> <the mapping file we created> 
+ if we want we can add timeout
+ 
+ example
+ /home/hari/test /etc/auto.mapping_exapmle --timeout=3000
+ 
+ now add the following entry in /etc/auto.mapping_example
+ 
+ <folder name for mount point>  -fstype=nfs <hostname:/<path of mount in server>>
+ 
+ do sudo service autofs reload
+ 
+ ---> using bindfs
+ 
+ first mount a mountpoint using anyof the above methods
+ 
+ then do bindfs -u <username who needs to own all the files in the mount> -g <group name who needs to own all the files> <path of mount point on local system> <path to the file on which we want to mount using the new owner and group>
+ ex : bindfs -u hari -g test_group /home/hari/test /home/hari/test_bindfs
+ Note : before running the bindfs make sure you have the destination folder present
+ 
+ reference for bindfs - https://manurevah.com/blah/en/p/Bindfs-Mount-files-as-another-user
+ 

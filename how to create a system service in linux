@@ -1,0 +1,88 @@
+create a script file with the following lines - 
+
+#!/bin/sh 
+SERVICE_NAME=Your_Service_Name 
+#PATH_TO_JAR=/usr/Name_of_User/MyJavaApplication.jar 
+PID_PATH_NAME=/tmp/Service_Name-pid 
+case $1 in 
+start)
+       echo "Starting $SERVICE_NAME ..."
+  if [ ! -f $PID_PATH_NAME ]; then 
+       <command u want to run (eg sh sample_script.sh or java sample_java)>  
+       #eg nohup java -jar $PATH_TO_JAR /tmp 2>> /dev/null >> /dev/null &
+                   echo $! > $PID_PATH_NAME  
+       echo "$SERVICE_NAME started ..."         
+  else 
+       echo "$SERVICE_NAME is already running ..."
+  fi
+;;
+stop)
+  if [ -f $PID_PATH_NAME ]; then
+         PID=$(cat $PID_PATH_NAME);
+         echo "$SERVICE_NAME stoping ..." 
+         kill $PID;         
+         echo "$SERVICE_NAME stopped ..." 
+         rm $PID_PATH_NAME       
+  else          
+         echo "$SERVICE_NAME is not running ..."   
+  fi    
+;;    
+restart)  
+  if [ -f $PID_PATH_NAME ]; then 
+      PID=$(cat $PID_PATH_NAME);    
+      echo "$SERVICE_NAME stopping ..."; 
+      kill $PID;           
+      echo "$SERVICE_NAME stopped ...";  
+      rm $PID_PATH_NAME     
+      echo "$SERVICE_NAME starting ..."  
+      <command u want to run (eg sh sample_script.sh or java sample_java)>  
+      #eg nohup java -jar $PATH_TO_JAR /tmp 2>> /dev/null >> /dev/null &
+      echo $! > $PID_PATH_NAME  
+      echo "$SERVICE_NAME started ..."    
+  else           
+      echo "$SERVICE_NAME is not running ..."    
+     fi     ;;
+ esac
+ 
+ 
+ test the script 
+ 
+ sh script_name.sh start
+ sh script_name.sh stop
+ sh script_name.sh restart
+ 
+ do cd /etc/systemd/system
+ 
+create a file with the following format
+
+touch <service_name>.service
+eg : touch hari.service  #a service with name hari will be created
+
+do vi hari.service and add the following lines
+
+[Unit]
+ Description = Java Service
+ After network.target = Service_Name.service
+[Service]
+ User=root(or any other user name u want to run the process with)
+ Type = forking
+ Restart=always
+ RestartSec=1
+ SuccessExitStatus=143 
+ ExecStart = /usr/local/bin/Service_Name.sh start 
+ ExecStop = /usr/local/bin/Service_Name.sh stop
+ ExecReload = /usr/local/bin/Service_Name.sh reload
+[Install]
+ WantedBy=multi-user.target
+ 
+ 
+ save the file
+ 
+ sudo systemctl daemon-reload
+sudo systemctl enable Service_Name
+sudo systemctl start  Service_Name
+sudo systemctl stop   Service_Name
+
+
+reference  - 
+https://medium.com/@ameyadhamnaskar/running-java-application-as-a-service-on-centos-599609d0c641
