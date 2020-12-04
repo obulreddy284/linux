@@ -1,0 +1,51 @@
+tr abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ	Convert lower case to upper case
+tr '{}' '()' < inputfile > outputfile	Translate braces into parenthesis
+echo "This is for testing" | tr [:space:] '\t'	Translate white-space to tabs
+echo "This   is   for    testing" | tr -s [:space:]
+Squeeze repetition of characters using -s
+echo "the geek stuff" | tr -d 't'	Delete specified characters using -d option
+echo "my username is 432234" | tr -cd [:digit:]	Complement the sets using -c option
+tr -cd [:print:] < file.txt	Remove all non-printable character from a file
+tr -s '\n' ' ' < file.txt	Join all the lines in a file into a single line
+
+ traceroute -T oracle_host -p jdbc_port
+  ldap
+/usr/sbin/slapd  -h "ldapi:/// ldap:///" -d stats &
+
+host--dns resolve linux
+nslookup-- dns resolve win
+
+Show current routing table	$ route –n or ip route
+Add static route	$ route add -net address or ip route add 
+Delete static route	$ route del -net address or ip route del 
+
+ethtool---	Queries network interfaces and can also set various parameters such as the speed
+netstat------	Displays all active connections and routing tables. Useful for monitoring performance and troubleshooting
+nmap---------Scans open ports on a network. Important for security analysis
+tcpdump	-----Dumps network traffic for analysis
+iptraf	----Monitors network traffic in text mode
+mtr	---------Combines functionality of ping and traceroute and gives a continuously updated display
+dig	-----------Tests DNS workings. A good replacement for host and nslookup
+curl ifconfig.co----public ip from server
+
+if statement
+
+-e file	Checks if the file exists.
+-d file	Checks if the file is a directory.
+-f file	Checks if the file is a regular file (i.e. not a symbolic link, device node, directory, etc.)
+-s file	Checks if the file is of non-zero size.
+-g file	Checks if the file has sgid set.
+-u file	Checks if the file has suid set.
+-r file	Checks if the file is readable.
+-w file	Checks if the file is writable.
+-x file	Checks if the file is executable.
+-n
+   string is not null.
+
+-z
+  string is null, that is, has zero length
+  
+  
+  
+
+

@@ -1,0 +1,104 @@
+The command line often allows the users to perform tasks more efficiently than the GUI.
+cat, short for concatenate, is used to read, print, and combine files.
+echo displays a line of text either on standard output or to place in a file.
+sed is a popular stream editor often used to filter and perform substitutions on files and text data streams.
+awk is an interpreted programming language, typically used as a data extraction and reporting tool.
+sort is used to sort text files and output streams in either ascending or descending order.
+uniq eliminates duplicate entries in a text file.
+paste combines fields from different files. It can also extract and combine lines from multiple sources.
+join combines lines from two files based on a common field. It works only if files share a common field.
+split breaks up a large file into equal-sized segments.
+Regular expressions are text strings used for pattern matching. The pattern can be used to search for a specific location, such as the start or end of a line or a word.
+grep searches text files and data streams for patterns and can be used with regular expressions.
+tr translates characters, copies standard input to standard output, and handles special characters.
+tee saves a copy of standard output to a file while still displaying at the terminal.
+wc (word count) displays the number of lines, words, and characters in a file or group of files.
+cut extracts columns from a file.
+less views files a page at a time and allows scrolling in both directions.
+head displays the first few lines of a file or data stream on standard output. By default, it displays 10 lines.
+tail displays the last few lines of a file or data stream on standard output. By default, it displays 10 lines.
+strings extracts printable character strings from binary files.
+The z command family is used to read and work with compressed files.
+You can use the route utility program to manage IP routing.
+You can monitor and debug network problems using networking tools.
+Firefox, Google Chrome, Chromium, and Epiphany are the main graphical browsers used in Linux.
+Non-graphical or text browsers used in Linux are Lynx, Links, and w3m.
+You can use wget to download webpages.
+You can use curl to obtain information about URLs.
+FTP (File Transfer Protocol) is used to transfer files over a network.
+ftp, sftp, ncftp, and yafc are command line FTP clients used in Linux.
+You can use ssh to run commands on remote systems.
+
+
+printers-------------------------
+lp <filename>	To print the file to default printer
+lp -d printer <filename>	To print to a specific printer (useful if multiple printers are available)
+program | lp
+echo string | lp	To print the output of a program
+lp -n number <filename>	To print multiple copies
+lpoptions -d printer	To set the default printer
+lpq -a	To show the queue status
+lpadmin	To configure printer queues
+lpadmin	To configure printer queues
+lpstat -p -d	To get a list of available printers, along with their status
+lpstat -a	To check the status of all connected printers, including job numbers
+cancel job-id
+OR
+lprm job-id	To cancel a print job
+lpmove job-id newprinter	To move a print job to new printer
+
+evince 1.pdf to open pdf
+pdf2ps file.pdf	Converts file.pdf to file.ps
+ps2pdf file.ps	Converts file.ps to file.pdf
+pstopdf input.ps output.pdf	Converts input.ps to output.pdf
+pdftops input.pdf output.ps	Converts input.pdf to output.ps
+convert input.ps output.pdf	Converts input.ps to output.pdf
+convert input.pdf output.ps	Converts input.pdf to output.ps
+qpdf --empty --pages 1.pdf 2.pdf -- 12.pdf	Merge the two documents 1.pdf and 2.pdf. The output will be saved to 12.pdf.
+qpdf --empty --pages 1.pdf 1-2 -- new.pdf	Write only pages 1 and 2 of 1.pdf. The output will be saved to new.pdf.
+qpdf --rotate=+90:1 1.pdf 1r.pdf
+
+qpdf --rotate=+90:1-z 1.pdf 1r-all.pdf
+
+Rotate page 1 of 1.pdf 90 degrees clockwise and save to 1r.pdf
+
+Rotate all pages of 1.pdf 90 degrees clockwise and save to 1r-all.pdf
+
+qpdf --encrypt mypw mypw 128 -- public.pdf private.pdf	Encrypt with 128 bits public.pdf using as the passwd mypw with output as private.pdf
+qpdf --decrypt --password=mypw private.pdf file-decrypted.pdf	Decrypt private.pdf with output as file-decrypted.pdf. 
+
+pdftk 1.pdf 2.pdf cat output 12.pdf	Merge the two documents 1.pdf and 2.pdf. The output will be saved to 12.pdf.
+pdftk A=1.pdf cat A1-2 output new.pdf	Write only pages 1 and 2 of 1.pdf. The output will be saved to new.pdf.
+pdftk A=1.pdf cat A1-endright output new.pdf	Rotate all pages of 1.pdf 90 degrees clockwise and save result in new.pdf.
+
+pdftk public.pdf output private.pdf user_pw PROMPT
+
+When you run this command, you will receive a prompt to set the required password, which can have a maximum of 32 characters. A new file, private.pdf, will be created with the identical content as public.pdf, but anyone will need to type the password to be able to view it.
+
+Combine three PDF files into one:
+$ gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite  -sOutputFile=all.pdf file1.pdf file2.pdf file3.pdf
+Split pages 10 to 20 out of a PDF file:
+$ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dDOPDFMARKS=false -dFirstPage=10 -dLastPage=20\
+-sOutputFile=split.pdf file.pdf
+
+pdfinfo 
+It can extract information about PDF files, especially when the files are very large or when a graphical interface is not available.
+flpsed 
+It can add data to a PostScript document. This tool is specifically useful for filling in forms or adding short comments into the document.
+pdfmod 
+It is a simple application that provides a graphical interface for modifying PDF documents. Using this tool, you can reorder, rotate, and remove pages; export images from a document; edit the title, subject, and author; add keywords; and combine documents using drag-and-drop action.
+
+CUPS provides two command-line interfaces: the System V and BSD.
+The CUPS interface is available at http://localhost:631.
+lp and lpr are used to submit a document to CUPS directly from the command line.
+lpoptions can be used to set printer options and defaults.
+PostScript effectively manages scaling of fonts and vector graphics to provide quality prints.
+enscript is used to convert a text file to PostScript and other formats.
+
+Portable Document Format (PDF) is the standard format used to exchange documents while ensuring a certain level of consistency in the way the documents are viewed.
+pdftk joins and splits PDFs; pulls single pages from a file; encrypts and decrypts PDF files; adds, updates, and exports a PDF’s metadata; exports bookmarks to a text file; adds or removes attachments to a PDF; fixes a damaged PDF; and fills out PDF forms.
+pdfinfo can extract information about PDF documents.
+flpsed can add data to a PostScript document.
+pdfmod is a simple application with a graphical interface that you can use to modify PDF documents.
+Furthermore, you never edit grub.cfg directly; instead, you can modify the configuration files in /etc/grub.d and /etc/defaults/grub, and then run update-grub, or grub2-mkconfig and save the new configuration file.
+
