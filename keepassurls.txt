@@ -1,0 +1,13 @@
+keepass
+
+mobaxterm
+
+
+cmd://"C:\Program Files (x86)\Mobatek\MobaXterm\MobaXterm.exe" -newtab "ssh {USERNAME}@{URL:RMVSCM}"
+
+
+
+putty
+
+
+cmd://"C:\Program Files\PuTTY\putty.exe"  -ssh {URL:RMVSCM} -l {USERNAME} -pw {PASSWORD}
